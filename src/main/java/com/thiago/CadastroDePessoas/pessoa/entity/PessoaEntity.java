@@ -1,7 +1,10 @@
-package com.thiago.CadastroDePessoas.entity;
+package com.thiago.CadastroDePessoas.pessoa.entity;
 
 
+import com.thiago.CadastroDePessoas.trabalho.entity.TrabalhoEntity;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_pessoa")
@@ -9,15 +12,25 @@ public class PessoaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private  Long id;
+    private Long id;
+
     @Column(name = "nome")
     private String nome;
+
     @Column(name = "cpf")
     private int cpf;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "data_nascimento")
     private String dataNascimento;
+
+    private List<TrabalhoEntity> listaDeTrabalhos;
+
+    @ManyToOne
+    @JoinColumn(name = "trabalho_id")
+    private TrabalhoEntity trabalho;
 
     public PessoaEntity(String nome, int cpf, String email, String dataNascimento) {
         this.nome = nome;
